@@ -1,4 +1,7 @@
 <?php
+	// seprate mysql authentication information for hosting the project on github
+	// mysql_ini.php is supposed to define a variable $con which has connection to the membership mysql database
+	include "mysql_ini.php";
 	header('Content-type: application/json');
 	// retrive information from post method
   $memid = $_POST["memid"];
@@ -6,7 +9,6 @@
   $lname = $_POST["lname"];
   $contact = $_POST["contact"];
   // inset values into database
-	$con = mysqli_connect("localhost", "root", "Justdoit", "umms");
 	$insert = "INSERT INTO members (memid,fname,lname,contact) VALUES ('" 
 		. $memid . "','" 
 		. $fname . "','" 

@@ -1,9 +1,11 @@
 <?php
+	// seprate mysql authentication information for hosting the project on github
+	// mysql_ini.php is supposed to define a variable $con which has connection to the membership mysql database
+	include "mysql_ini.php";
 	header('Content-type: application/json');
 	// retrive information from post method
   $memid = $_POST["memid"];
   // inset values into database
-	$con = mysqli_connect("localhost", "root", "Justdoit", "umms");
 	$sql = "SELECT * FROM members WHERE memid = " . $memid;
 	$result = mysqli_query($con, $sql);
 	$row = mysqli_fetch_array($result);
