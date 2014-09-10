@@ -1,7 +1,11 @@
-var findForm = 'Member ID: <input type="text" id="find_member"><br><button onclick="findMember()">find</button>';
 
 $("document").ready(function(){
-	$("#find").click(findMember)
+	// add event handler
+	$("#find").click(findMember);
+	$(".back").click(backToFind);
+	// hide the result and error area to overwirte user agent's style sheet settings
+	$("#result").css("display","none");
+	$("#error").css("display","none");
 })
 
 function findMember() {
@@ -23,23 +27,25 @@ function findMember() {
 			// reset and hide form
 			$("input").val("");
 			$("#findForm").css("display","none");
-			// add result
+			// change result content
 			if (result["error"] !== undefined) {
-				$("#result").html(result["error"]+"<br><button onclick=backToFind()>ok</button>");
-			} else {
-				$("#result").html(
-					"Member ID: "+result["memid"]
-					+"<br>First Name: "+result["fname"]
-					+"<br>Last Name: "+result["lname"]
-					+"<br>Contact: "+result["contact"]
-					+"<br><button onclick=backToFind()>ok</button>"
-				);
+				$("#err_msg").html(result["error"]+"<br><br>");
+				$("#error").css("display","");
+			} 
+			else {
+				$("#memid_result").html(result["memid"]);
+				$("#fname_result").html(result["fname"]);
+				$("#lname_result").html(result["lname"]);
+				$("#contact_result").html(result["contact"]);
+				$("#credit_result").html(result["credit"]);
+				$("#result").css("display", "");
 			}
-			// show result
-			$("#result").css("display", "");
 		},
 		error: function(error){
-			console.log(error.responseText);
+			$("input").val("");
+			$("#findForm").css("display","none");
+			$("#err_msg").html(error["responseText"]+"<br><br>");
+			$("#error").css("display","");
 		},
 		complete: function(){
 			console.log("complete");
@@ -48,6 +54,10 @@ function findMember() {
 }
 
 function backToFind() {
+	// reset input value
+	$("input").val("");
+	// display form and hide result and error
 	$("#findForm").css("display","");
 	$("#result").css("display","none");
+	$("#error").css("display","none");
 }

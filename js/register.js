@@ -1,8 +1,11 @@
-var registerForm = 'Member ID: <input type="text" id="member_id"><br>First Name: <input type="text" maxlength="20" id="first_name"><br>Last Name: <input type="text" maxlength="20" id="last_name"><br>Contact: <input type="text" maxlength="50" id="contact"><br><button onclick="register()">register</button>';
 
-// add register() funciton as an event handler to register button
 $("document").ready(function(){
-	$("#registerButton").click(register)
+	// add event handlers
+	$("#registerButton").click(register);
+	$(".back").click(backToRegister);
+	// hide the result and error area to overwirte user agent's style sheet settings
+	$("#result").css("display","none");
+	$("#error").css("display","none");
 })
 
 // collect and validate form data
@@ -35,22 +38,22 @@ function register(){
 				$("#registerForm").css("display","none");
 				// change result content
 				if (result["error"] !== undefined) {
-					$("#result").html(result["error"]+"<br><button onclick=backToRegister()>ok</button>");
+					$("#err_msg").html(result["error"]+"<br><br>");
+					$("#error").css("display","");
 				} 
 				else {
-					$("#result").html(
-						"<b>Confirmation</b><br>Member ID: "+result["memid"]
-						+"<br>First Name: "+result["fname"]
-						+"<br>Last Name: "+result["lname"]
-						+"<br>Contact: "+result["contact"]
-						+"<br><button onclick=backToRegister()>ok</button>"
-						);
+					$("#memid_result").html(result["memid"]);
+					$("#fname_result").html(result["fname"]);
+					$("#lname_result").html(result["lname"]);
+					$("#contact_result").html(result["contact"]);
+					$("#result").css("display","");
 				}
-				// show result
-				$("#result").css("display", "");
 	 		},
 	 		error: function(error){
-	 			console.log(error.responseText);
+	 			$("input").val("");
+				$("#findForm").css("display","none");
+				$("#err_msg").html(error["responseText"]+"<br><br>");
+				$("#error").css("display","");
 	 		},
 	 		complete: function(){
 	 			console.log("complete");
@@ -67,4 +70,6 @@ function backToRegister() {
 	// display form and hide result
 	$("#registerForm").css("display","");
 	$("#result").css("display", "none");
+	$("#error").css("display","none");
+
 }

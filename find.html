@@ -3,19 +3,70 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UWCSSA Membership Management System - Find Member</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="shortcut icon" href="img/icon.jpg">
 </head>
 <body>
-	<a href="index.html">register</a>
-
-	<div id="findForm">
-		Member ID: <input type="text" id="memid"><br>
-		<button id="find">find</button>
+	<!-- top navigation bar -->
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">UWCSSA Membership Management System</a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar-main">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="index.html">Register</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><img src="img/logo.png" width="110" height="50"></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 
-	<div id="result" display="none">
+	<!-- find form -->
+	<div class="container" id="findForm">
+		<div class="form-group">
+			<label for="memid">Member ID</label>
+			<input type="text" class="form-control" id="memid" placeholder="Enter Member ID on the Card">
+		</div>
+		<button id="find" class="btn btn-default">find</button>
+	</div>
+
+	<!-- result area -->
+	<div class="container" id="result">
+		<table class="table table-bordered" id="confirm">
+			<colgroup>
+				<col span="1" style="width: 30%;">
+			</colgroup>
+			</tbody>
+				<tr><th>Member ID</th><td id="memid_result"></td></tr>
+				<tr><th>First Name</th><td id="fname_result"></td></tr>
+				<tr><th>Last Name</th><td id="lname_result"></td></tr>
+				<tr><th>Contact</th><td id="contact_result"></td></tr>
+				<tr><th>Credit</th><td id="credit_result"></td></tr>
+			</tbody>
+		</table>
+		<button class="btn btn-default back">OK</button>
+	</div>
+
+	<!-- error area -->
+	<div class="container" id="error">
+		<div id="err_msg">
+		</div>
+		<button class="btn btn-default back">OK</button>
 	</div>
 
 	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/findMember.js"></script>
 </body>
 </html>
