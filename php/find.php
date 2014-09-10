@@ -6,15 +6,10 @@
 	$con = mysqli_connect("localhost", "root", "Justdoit", "umms");
 	$sql = "SELECT * FROM members WHERE memid = " . $memid;
 	$result = mysqli_query($con, $sql);
-	// echo $sql;
-	if ($result === false) {
-		echo "wrong sql statement " . $sql;
+	$row = mysqli_fetch_array($result);
+	if ($row === NULL) {
+		echo json_encode(array("error"=>"no such member"));
 	} else {
-		$row = mysqli_fetch_array($result);
-		if ($row === NULL) {
-			echo json_encode(array("memid"=>-1));
-		} else {
-			echo json_encode($row);
-		}
+		echo json_encode($row);
 	}
 ?>

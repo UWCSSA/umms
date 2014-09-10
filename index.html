@@ -3,20 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>UWCSSA Membership Management System - Register</title>
+
 </head>
 <body>
-	<a href="check.html">find</a>
-
-	<form id="registerForm">
-		Member ID: <input type="text" id="member_id"><br>
-		First Name: <input type="text" maxlength="20" id="first_name"><br>
-		Last Name: <input type="text" maxlength="20" id="last_name"><br>
+	<a href="find.html">find</a>
+	<!-- register form -->
+	<div id="registerForm">
+		Member ID: <input type="text" id="memid"><br>
+		First Name: <input type="text" maxlength="20" id="fname"><br>
+		Last Name: <input type="text" maxlength="20" id="lname"><br>
 		Contact: <input type="text" maxlength="50" id="contact"><br>
 		<button id="registerButton">Register</button>
-	</form>
+	</div>
+	<!-- result area -->
+	<div id="result" display="none">
+	</div>
 
-	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/register.js"></script>
+
 </body>
 
 </html>

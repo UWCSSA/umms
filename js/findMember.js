@@ -5,7 +5,12 @@ $("document").ready(function(){
 })
 
 function findMember() {
-	var memid = $("#find_member").val();
+	//validate data
+	var memid = parseInt($("#memid").val());
+	if (isNaN(memid)) {
+		alert("Member ID must be a valid number");
+		return;
+	}
 	$.ajax({
 		type: "POST",
 		url: "php/find.php",
@@ -14,28 +19,35 @@ function findMember() {
 			memid: memid
 		},
 		dataType: "json",
-		success: function(data){
-			if (data.memid === -1) {
-				$("#findForm").html("member not found"+"<br><button onclick=backToFind()>ok</button>");
+		success: function(result){
+			// reset and hide form
+			$("input").val("");
+			$("#findForm").css("display","none");
+			// add result
+			if (result["error"] !== undefined) {
+				$("#result").html(result["error"]+"<br><button onclick=backToFind()>ok</button>");
 			} else {
-    		$("#findForm").html(
-					"<br>Member ID: "+data.memid
-					+"<br>First Name: "+data.fname
-					+"<br>Last Name: "+data.lname
-					+"<br>Contact: "+data.contact
+				$("#result").html(
+					"Member ID: "+result["memid"]
+					+"<br>First Name: "+result["fname"]
+					+"<br>Last Name: "+result["lname"]
+					+"<br>Contact: "+result["contact"]
 					+"<br><button onclick=backToFind()>ok</button>"
 				);
-    	}
- 		},
- 		error: function(error){
- 			console.log(error);
- 		},
- 		complete: function(){
- 			console.log("complete");
- 		}
- 	});
+			}
+			// show result
+			$("#result").css("display", "");
+		},
+		error: function(error){
+			console.log(error.responseText);
+		},
+		complete: function(){
+			console.log("complete");
+		}
+	});
 }
 
 function backToFind() {
-	$('#findForm').html(findForm);
+	$("#findForm").css("display","");
+	$("#result").css("display","none");
 }

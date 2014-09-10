@@ -13,7 +13,7 @@ function collectFormData(){
 		formData[input[i].id]=input[i].value;
 	}
 	//validate data
-	var memid = parseInt(formData["member_id"]);
+	var memid = parseInt(formData["memid"]);
 	if (isNaN(memid)) {
 		throw "Member ID must be a valid number";
 	}
@@ -24,32 +24,47 @@ function register(){
 	try {
 		var data = collectFormData();
 		$.ajax({
-		type: "POST",
-		url: "php/register.php",
-		async: false,
-		data: data,
-		dataType: "json",
-		success: function(result){
-			$("#registerForm").html(
-				"<b>Confirmation</b><br>Member ID: "+result["member_id"]
-				+"<br>First Name: "+result["first_name"]
-				+"<br>Last Name: "+result["last_name"]
-				+"<br>Contact: "+result["contact"]
-				+"<br><button onclick=backToRegister()>ok</button>"
-				);
- 		},
- 		error: function(error){
- 			console.log(error);
- 		},
- 		complete: function(){
- 			console.log("complete");
- 		}
- 	});
+			type: "POST",
+			url: "php/register.php",
+			async: false,
+			data: data,
+			dataType: "json",
+			success: function(result){
+				// reset and hide form
+				$("input").val("");
+				$("#registerForm").css("display","none");
+				// change result content
+				if (result["error"] !== undefined) {
+					$("#result").html(result["error"]+"<br><button onclick=backToRegister()>ok</button>");
+				} 
+				else {
+					$("#result").html(
+						"<b>Confirmation</b><br>Member ID: "+result["memid"]
+						+"<br>First Name: "+result["fname"]
+						+"<br>Last Name: "+result["lname"]
+						+"<br>Contact: "+result["contact"]
+						+"<br><button onclick=backToRegister()>ok</button>"
+						);
+				}
+				// show result
+				$("#result").css("display", "");
+	 		},
+	 		error: function(error){
+	 			console.log(error.responseText);
+	 		},
+	 		complete: function(){
+	 			console.log("complete");
+	 		}
+ 		});
 	} catch(err) {
 		alert(err);
 	}
 }
 
 function backToRegister() {
-	$('#registerForm').html(registerForm);
+	// reset input value
+	$("input").val("");
+	// display form and hide result
+	$("#registerForm").css("display","");
+	$("#result").css("display", "none");
 }
