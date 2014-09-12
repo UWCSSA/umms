@@ -6,9 +6,13 @@ $("document").ready(function(){
 	// hide the result and error area to overwirte user agent's style sheet settings
 	$("#result").css("display","none");
 	$("#error").css("display","none");
+
+	// change padding of body because of static navbar
+	$("body").css("padding-top",$(".navbar-fixed-top").outerHeight(true));
+	$("body").css("padding-bottom","20px");
 	// if mobile device used, make brand font smaller for better appearance
 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		$(".navbar-brand").css("font-size","10px");
+		$(".navbar-brand").css("font-size","8px");
 	}
 })
 
