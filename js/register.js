@@ -45,7 +45,7 @@ function register(){
 					$("#memid_result").html(result["memid"]);
 					$("#fname_result").html(result["fname"]);
 					$("#lname_result").html(result["lname"]);
-					$("#contact_result").html(result["contact"]);
+					$("#email_result").html(result["email"]);
 					$("#result").css("display","");
 				}
 	 		},

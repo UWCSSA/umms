@@ -7,13 +7,13 @@
   $memid = $_POST["memid"];
   $fname = $_POST["fname"];
   $lname = $_POST["lname"];
-  $contact = $_POST["contact"];
+  $email = $_POST["email"];
   // inset values into database
-	$insert = "INSERT INTO members (memid,fname,lname,contact) VALUES ('" 
+	$insert = "INSERT INTO members (memid,fname,lname,email) VALUES ('" 
 		. $memid . "','" 
 		. $fname . "','" 
 		. $lname . "','"
-		. $contact . "')";
+		. $email . "')";
 	$query = "SELECT * from members WHERE memid = " . $memid;
 	// return result
 	if (mysqli_query($con,$insert) && $result = mysqli_query($con, $query)) {
