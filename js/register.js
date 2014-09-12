@@ -6,6 +6,10 @@ $("document").ready(function(){
 	// hide the result and error area to overwirte user agent's style sheet settings
 	$("#result").css("display","none");
 	$("#error").css("display","none");
+	// if mobile device used, make brand font smaller for better appearance
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		$(".navbar-brand").css("font-size","10px");
+	}
 })
 
 // collect and validate form data
