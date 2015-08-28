@@ -3,25 +3,30 @@
 	// mysql_ini.php is supposed to define a variable $con which has connection to the membership mysql database
 	include "mysql_ini.php";
 	header('Content-type: application/json');
-	// retrive information from post method
-  $memid = $_POST["memid"];
-  $fname = $_POST["fname"];
-  $lname = $_POST["lname"];
-  $email = $_POST["email"];
-  // inset values into database
-	$insert = "INSERT INTO members (memid,fname,lname,email) VALUES ('" 
-		. $memid . "','" 
-		. $fname . "','" 
-		. $lname . "','"
-		. $email . "')";
-	$query = "SELECT * from members WHERE memid = " . $memid;
+
+	// prepare and bind
+	$stmt = $con->prepare(
+		"INSERT INTO members (email,mobile,fname,lname,gender,school,sid,program)
+		VALUES (?,?,?,?,?,?,?,?)"
+	);
+	$stmt->bind_param("ssssssss", $email, $mobile, $fname, $lname, $gender, $school, $sid, $program);
+
+	// set parameters and execute
+	$email = $_POST["email"];
+	$mobile = $_POST["mobile"];
+	$fname = $_POST["fname"];
+	$lname = $_POST["lname"];
+	$gender = $_POST["gender"];
+	$school = $_POST["school"];
+	$sid = $_POST["sid"];
+	$program = $_POST["program"];
+
+
 	// return result
-	if (mysqli_query($con,$insert) && $result = mysqli_query($con, $query)) {
-  		$row = mysqli_fetch_array($result);
-  		if ($row !== NULL) {
-  			echo json_encode($row);
-  		}
+	if ($stmt->execute()) {
+  	header("Location: ../success.html");
   } else {
-  	echo json_encode(array("error"=>mysqli_error($con)));
+  	header("Location: ../fail.html");
 	}
+	$stmt->close();
 ?>

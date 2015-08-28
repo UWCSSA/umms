@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<!-- mobile support -->
@@ -8,9 +9,10 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="shortcut icon" href="img/icon.jpg">
 </head>
+
 <body>
 	<!-- top navigation bar -->
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -22,67 +24,81 @@
 				</button>
 			</div>
 			<div class="navbar-collapse collapse" id="navbar-main">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="find.html">Find Member</a>
-					</li>
-				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><img src="img/logo.png" width="110" height="50"></li>
+					<li class="active">
+						<img src="img/logo.png" width="110" height="50">
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
 	<!-- register form -->
-	<div class="container" id="registerForm">
-		<div class="form-group">
-			<label for="memid">Member ID</label>
-			<input type="text" class="form-control" id="memid" placeholder="Enter Member ID on the Card">
-		</div>
-		<div class="form-group">
-			<label for="fname">First Name</label>
-			<input type="text" class="form-control" id="fname" placeholder="First Name">
-		</div>
-		<div class="form-group">
-			<label for="lname">Last Name</label>
-			<input type="text" class="form-control" id="lname" placeholder="Last Name">
-		</div>
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input type="email" class="form-control" id="email" placeholder="email@example.com">
-		</div>
-		<br>
-		<button class="btn btn-default" id="registerButton">Register</button>
-	</div>
-
-	<!-- confirm area -->
-	<div class="container" id="result">
-		<table class="table table-bordered" id="confirm">
-			<colgroup>
-				<col span="1" style="width: 30%;">
-			</colgroup>
-			</tbody>
-				<tr><th>Confirm</th><td></td></tr>
-				<tr><th>Member ID</th><td id="memid_result"></td></tr>
-				<tr><th>First Name</th><td id="fname_result"></td></tr>
-				<tr><th>Last Name</th><td id="lname_result"></td></tr>
-				<tr><th>Email</th><td id="email_result"></td></tr>
-			</tbody>
-		</table>
-		<button class="btn btn-default back">OK</button>
-	</div>
-
-	<!-- error area -->
-	<div class="container" id="error">
-		<div id="err_msg">
-		</div>
-		<button class="btn btn-default back">OK</button>
+	<div class="container">
+		<form role="form" class="form-horizontal" action="php/register.php" method="post" data-toggle="validator">
+			<div class="form-group">
+				<label for="email" class="control-label col-md-2">Email:</label>
+				<div class="col-md-6">
+					<input type="email" required class="form-control" name="email" placeholder="email@example.com">
+    		</div>
+			</div>
+			<div class="form-group">
+				<label for="mobile" class="control-label col-md-2">Mobile Number:</label>
+				<div class="col-md-6">
+					<input type="number" required class="form-control" name="mobile">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="fname" class="control-label col-md-2">First Name:</label>
+				<div class="col-md-6">
+					<input type="text" required class="form-control" name="fname">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lname" class="control-label col-md-2">Last Name:</label>
+				<div class="col-md-6">
+					<input type="text" required class="form-control" name="lname">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="gender" class="control-label col-md-2">Gender:</label>
+				<div class="col-md-6">
+					<label class="radio-inline"><input type="radio" name="gender" value="male" required> male</label>
+					<label class="radio-inline"><input type="radio" name="gender" value="female" required> female</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="school" class="control-label col-md-2">School:</label>
+				<div class="col-md-6">
+					<select class="form-control" name="school">
+						<option value="waterloo">University of Waterloo</option>
+						<option value="laurier">Wilfrid Laurier University</option>
+						<option value="cc">Conestoga College</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="student_id" class="control-label col-md-2">Student ID:</label>
+				<div class="col-md-6">
+					<input type="number" class="form-control" name="sid" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="program" class="control-label col-md-2">Program:</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="program" required>
+				</div>
+			</div>
+			<div class="form-group">
+		    <div class="col-md-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Submit</button>
+		    </div>
+		  </div>
+		</form>
 	</div>
 
 	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/register.js"></script>
 </body>
 
 </html>
