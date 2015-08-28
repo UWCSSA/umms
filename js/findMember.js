@@ -18,17 +18,13 @@ $("document").ready(function(){
 
 function findMember() {
 	//validate data
-	var memid = parseInt($("#memid").val());
-	if (isNaN(memid)) {
-		alert("Member ID must be a valid number");
-		return;
-	}
+	var email = $("#email").val();
 	$.ajax({
 		type: "POST",
 		url: "php/find.php",
 		async: false,
 		data: {
-			memid: memid
+			email: email
 		},
 		dataType: "json",
 		success: function(result){
@@ -39,7 +35,7 @@ function findMember() {
 			if (result["error"] !== undefined) {
 				$("#err_msg").html(result["error"]+"<br><br>");
 				$("#error").css("display","");
-			} 
+			}
 			else {
 				$("#memid_result").html(result["memid"]);
 				$("#fname_result").html(result["fname"]);
