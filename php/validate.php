@@ -15,9 +15,9 @@
   $stmt->bind_result($num_email);
   $stmt->fetch();
 
-	// return result
+	// use different http response code for validator api
 	if ($num_email === 0) {
-    http_response_code(200);
+    header("HTTP/1.0 200");
   } else {
     header("HTTP/1.0 400 The email address has already been used");
 	}
