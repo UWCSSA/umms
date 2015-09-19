@@ -25,9 +25,9 @@
 
 	// return result
 	if ($stmt->execute()) {
-  	header("Location: ../success.html");
+  	header("Location: ../reg_success.html");
   } else {
-  	header("Location: ../fail.html");
+  	header("Location: ../reg_fail.html");
 	}
 	$stmt->close();
 ?>

@@ -11,15 +11,15 @@
 
 	// set parameters and execute
 	$email = $_GET["email"];
-  $stmt->execute();
-  $stmt->bind_result($num_email);
-  $stmt->fetch();
+	$stmt->execute();
+	$stmt->bind_result($num_email);
+	$stmt->fetch();
 
 	// use different http response code for validator api
 	if ($num_email === 0) {
-    header("HTTP/1.0 200");
-  } else {
-    header("HTTP/1.0 400 The email address has already been used");
+		header("HTTP/1.0 200");
+	} else {
+		header("HTTP/1.0 400 The email address has already been used");
 	}
 	$stmt->close();
 ?>

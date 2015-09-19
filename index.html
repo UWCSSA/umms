@@ -25,6 +25,11 @@
 				</button>
 			</div>
 			<div class="navbar-collapse collapse" id="navbar-main">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="login.html">Login</a>
+					</li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="active">
 						<img src="img/logo.png" width="110" height="50">
@@ -36,7 +41,7 @@
 
 	<!-- register form -->
 	<div class="container">
-		<form role="form" class="form-horizontal" action="php/register.php"
+		<form role="form" class="form-horizontal" action="php/handle_register.php"
 		method="post" data-toggle="validator">
 			<div class="form-group">
 				<label for="email" class="control-label col-md-2">Email:</label>
@@ -100,6 +105,7 @@
 						<option value="waterloo">University of Waterloo</option>
 						<option value="laurier">Wilfrid Laurier University</option>
 						<option value="cc">Conestoga College</option>
+						<option value="other">Others</option>
 					</select>
 					<div class="help-block with-errors"></div>
 				</div>
