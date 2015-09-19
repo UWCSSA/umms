@@ -19,6 +19,23 @@
     // get result
     $stmt->bind_result($user_fname, $user_lname, $user_memid, $user_credit);
     $stmt->fetch();
+
+		// use PHP native GD library to create an e-card image
+		$card_width = 800;
+		$card_height = 500;
+		$card_height_offset = 30;
+		$card_owner_text = "NAME: " . $user_fname . " " . $user_lname;
+		$card_number_text = "NUMBER: " . $user_memid;
+		$image = imagecreatefrompng("../img/card.png");
+		// set text color to be white
+		$textcolor = imagecolorallocate($image, 255, 255, 255);
+		// Write the string
+		imagestring($image, 5, $card_width*0.1, $card_height*0.2, $card_owner_text, $textcolor);
+		imagestring($image, 5, $card_width*0.1, $card_height*0.2+$card_height_offset, $card_number_text, $textcolor);
+		// A walk around to use base64_encode for GD
+		ob_start();
+		imagepng($image); // no second parameter, will do output instead of writing to file
+		$image = ob_get_clean();
   } else {
   	header("Location: ../fail.html");
 	}
@@ -64,17 +81,29 @@
 	<!-- account information -->
   <div class="container">
     <?php if ($user_fname !== NULL) { ?>
-  		<table class="table table-bordered table-nonfluid">
-  			</tbody>
-  				<tr><th class="col-md-2">First Name</th><td class="col-md-6"><?php echo $user_fname?></td></div></tr>
-  				<tr><th class="col-md-2">Last Name</th><td class="col-md-6"><?php echo $user_lname?></td></tr>
-  				<tr><th class="col-md-2">Member ID</th><td class="col-md-6"><?php echo $user_memid?></td></tr>
-  				<tr><th class="col-md-2">Credit</th><td class="col-md-6"><?php echo $user_credit?></td></tr>
-  			</tbody>
-  		</table>
-  		<a href="../login.html" class="btn btn-warning" role="button">Logout</a>
+			<div class="row">
+				<div class="col-md-6">
+		  		<table class="table table-bordered">
+		  			</tbody>
+		  				<tr><th class="col-md-2">First Name</th><td class="col-md-6"><?php echo $user_fname?></td></div></tr>
+		  				<tr><th class="col-md-2">Last Name</th><td class="col-md-6"><?php echo $user_lname?></td></tr>
+		  				<tr><th class="col-md-2">Member ID</th><td class="col-md-6"><?php echo $user_memid?></td></tr>
+		  				<tr><th class="col-md-2">Credit</th><td class="col-md-6"><?php echo $user_credit?></td></tr>
+		  			</tbody>
+		  		</table>
+				</div>
+				<div class="col-md-6">
+					<img src="data:image/x-icon;base64,<?php echo base64_encode($image); ?>"></img>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+		  		<a href="../login.html" class="btn btn-warning" role="button">Logout</a>
+				</div>
+			</div>
     <?php } else { ?>
       <h5>Account Doesn't Exist Or Incorrect Password!</h5></br>
+			<div>
       <a href="../login.html" class="btn btn-warning" role="button">Back</a>
     <?php } ?>
   </div>
