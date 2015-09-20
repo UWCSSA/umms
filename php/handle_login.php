@@ -35,7 +35,8 @@
 		// A walk around to use base64_encode for GD
 		ob_start();
 		imagepng($image); // no second parameter, will do output instead of writing to file
-		$image = ob_get_clean();
+		$image_base64 = ob_get_clean();
+		imagedestroy($image);
   } else {
   	header("Location: ../fail.html");
 	}
@@ -93,7 +94,7 @@
 		  		</table>
 				</div>
 				<div class="col-md-6">
-					<img src="data:image/x-icon;base64,<?php echo base64_encode($image); ?>"></img>
+					<img src="data:image/x-icon;base64,<?php echo base64_encode($image_base64); ?>"></img>
 				</div>
 			</div>
 			<div class="row">
