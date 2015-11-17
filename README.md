@@ -2,3 +2,4 @@ a simple membership management system for UWCSSA (University of Waterloo Chinese
 
 Technology used: jquery, ajax, bootstrap css framework, php, mysql
 
+test 
