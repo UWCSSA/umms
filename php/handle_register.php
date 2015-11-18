@@ -3,6 +3,24 @@
 	// mysql_ini.php is supposed to define a variable $con which has connection to the membership mysql database
 	include "mysql_ini.php";
 
+	// captcha validation
+	$captcha;
+	if(isset($_POST['g-recaptcha-response']))
+	  $captcha=$_POST['g-recaptcha-response'];
+
+	if(!$captcha){
+	  header("Location: ../captcha_fail.html");
+	  exit;
+	}
+	$response=json_decode(file_get_contents(
+		"https://www.google.com/recaptcha/api/siteverify?secret=******&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+	if($response['success'] == false)
+	{
+	  header("Location: ../captcha_fail.html");
+	  exit;
+	}
+
+
 	// prepare and bind
 	$stmt = $con->prepare(
 		"INSERT INTO members (email,password,mobile,fname,lname,gender,school,sid,program)

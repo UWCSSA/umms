@@ -8,6 +8,7 @@
 	<title>UWCSSA Membership Management System - Register</title>
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="shortcut icon" href="img/icon.jpg">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -121,6 +122,13 @@
 				<label for="program" class="control-label col-md-2">Program:</label>
 				<div class="col-md-6">
 					<input type="text" required class="form-control" name="program" required>
+					<div class="help-block with-errors"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Captcha" class="control-label col-md-2">Captcha:</label>
+				<div class="col-md-6">
+					<div class="g-recaptcha" data-sitekey="6LdHNRETAAAAAAWEvnC5kWNhdTQxB5KjyXR2pOSl"></div>
 					<div class="help-block with-errors"></div>
 				</div>
 			</div>
