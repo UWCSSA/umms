@@ -5,7 +5,7 @@
 
 	// prepare and bind
 	$stmt = $con->prepare(
-		"SELECT fname,lname,memid,credit FROM members
+		"SELECT fname,lname,memid,credit,regdate FROM members
     WHERE email = ? AND password = ?"
 	);
 	$stmt->bind_param("ss", $email, $password);
@@ -16,22 +16,35 @@
 
 	// return result
 	if ($stmt->execute()) {
-    // get result
-    $stmt->bind_result($user_fname, $user_lname, $user_memid, $user_credit);
-    $stmt->fetch();
+	    // get result
+	    $stmt->bind_result($user_fname, $user_lname, $user_memid, $user_credit, $user_regdate);
+	    $stmt->fetch();
 
 		// use PHP native GD library to create an e-card image
 		$card_width = 800;
 		$card_height = 500;
-		$card_height_offset = 30;
-		$card_owner_text = "NAME: " . $user_fname . " " . $user_lname;
-		$card_number_text = "NUMBER: " . $user_memid;
+		$name_height_offset = 15; // same as font-size
+		$card_height_offset = 20;
+		$card_owner_text = $user_fname . " " . $user_lname;
+		$register_year = substr($user_regdate, 0, 4);
+		$user_memid_padding = $register_year.str_pad(strval($user_memid), 8, "0", STR_PAD_LEFT);
+		$card_number_text = substr($user_memid_padding, 0, 4)."  ".
+							substr($user_memid_padding, 4, 4)."  ".
+							substr($user_memid_padding, 8, 4);
 		$image = imagecreatefrompng("../img/card.png");
 		// set text color to be white
-		$textcolor = imagecolorallocate($image, 255, 255, 255);
+		$textcolorname = imagecolorallocate($image, 241, 236, 144);
+		$textcolorcard = imagecolorallocate($image, 255, 255, 255);
+		$fontname = "../img/Bold.ttf";
+		$fontcard = "../img/Bold.ttf";
 		// Write the string
-		imagestring($image, 5, $card_width*0.1, $card_height*0.2, $card_owner_text, $textcolor);
-		imagestring($image, 5, $card_width*0.1, $card_height*0.2+$card_height_offset, $card_number_text, $textcolor);
+		// array imagettftext ( resource $image , float $size , float $angle , int $x , int $y ,
+		//                      int $color , string $fontfile , string $text )
+		imagettftext($image, 15, 0, $card_width*0.27, $card_height*0.36+$name_height_offset,
+					 $textcolorname, $fontname, $card_owner_text);
+		imagettftext($image, 20, 0, $card_width*0.042, $card_height*0.21+$name_height_offset,
+					 $textcolorcard, $fontcard, $card_number_text);
+
 		// A walk around to use base64_encode for GD
 		ob_start();
 		imagepng($image); // no second parameter, will do output instead of writing to file
@@ -88,7 +101,7 @@
 		  			</tbody>
 		  				<tr><th class="col-md-2">First Name</th><td class="col-md-6"><?php echo $user_fname?></td></div></tr>
 		  				<tr><th class="col-md-2">Last Name</th><td class="col-md-6"><?php echo $user_lname?></td></tr>
-		  				<tr><th class="col-md-2">Member ID</th><td class="col-md-6"><?php echo $user_memid?></td></tr>
+		  				<tr><th class="col-md-2">Member ID</th><td class="col-md-6"><?php echo $user_memid_padding?></td></tr>
 		  				<tr><th class="col-md-2">Credit</th><td class="col-md-6"><?php echo $user_credit?></td></tr>
 		  			</tbody>
 		  		</table>
