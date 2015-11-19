@@ -4,7 +4,7 @@ SET time_zone = "+00:00";
 -- Database: `umms`
 
 CREATE TABLE IF NOT EXISTS `members` (
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL UNIQUE,
   `password` varchar(20) NOT NULL,
   `memid` int primary key NOT NULL AUTO_INCREMENT,
   `fname` varchar(50) NOT NULL,
