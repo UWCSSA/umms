@@ -78,14 +78,16 @@
 			<div class="form-group">
 				<label for="fname" class="control-label col-md-2">First Name:</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="fname" required>
+					<input type="text" class="form-control" name="fname" maxlength="12" required>
+					<div class="help-block">Only First 12 Characters Will Be Shown</div>
 					<div class="help-block with-errors"></div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="lname" class="control-label col-md-2">Last Name:</label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="lname" required>
+					<input type="text" class="form-control" name="lname" maxlength="9" required>
+					<div class="help-block">Only First 9 Characters Will Be Shown</div>
 					<div class="help-block with-errors"></div>
 				</div>
 			</div>
