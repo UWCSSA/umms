@@ -17,3 +17,6 @@ CREATE TABLE IF NOT EXISTS `members` (
   `sid` varchar(8) NOT NULL,
   `mobile` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE members AUTO_INCREMENT=500;

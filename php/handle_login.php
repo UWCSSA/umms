@@ -102,7 +102,7 @@
             <div class="row">
                 <div class="col-md-6">
                   <table class="table table-bordered">
-                      </tbody>
+                      <tbody>
                           <tr><th class="col-md-2">First Name</th><td class="col-md-6"><?php echo $user_fname?></td></div></tr>
                           <tr><th class="col-md-2">Last Name</th><td class="col-md-6"><?php echo $user_lname?></td></tr>
                           <tr><th class="col-md-2">Member ID</th><td class="col-md-6"><?php echo $user_memid_padding?></td></tr>
